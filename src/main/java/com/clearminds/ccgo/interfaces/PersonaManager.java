@@ -2,6 +2,8 @@ package com.clearminds.ccgo.interfaces;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Properties;
 
 import com.clearminds.ccgo.exceptions.InstanceException;
@@ -11,15 +13,10 @@ public class PersonaManager {
 	private ServicioPersona serv;
 
 	public PersonaManager() throws InstanceException {
-		Properties propiedades = new Properties();
-		File f = new File("properties");
-		System.out.println("ruta:" + f.getAbsoluteFile());
-		String propiedadClase = "";
+		
 		try {
-			propiedades.load(new FileInputStream(
-					"C:/Users/USER/Desktop/Herencia/src/main/java/com/clearminds/ccgo/middleware/properties"));
-			propiedadClase =  propiedades.getProperty("clase");
-			Class claseBDD = Class.forName(propiedadClase);
+			String valorPropiedad = leerProperties("clase");
+			Class claseBDD = Class.forName(valorPropiedad);
 
 			serv = (ServicioPersona) claseBDD.newInstance();
 		} catch (Exception e) {
@@ -27,6 +24,24 @@ public class PersonaManager {
 			throw new InstanceException("Error al obtener una instancia de ServicioPersona");
 		}
 
+	}
+	
+	public String leerProperties(String nombre){
+		Properties propiedades = new Properties();
+		File f = new File("properties");
+		System.out.println("ruta:" + f.getAbsoluteFile());
+		String propiedadClase = "";
+		
+		try {
+			propiedades.load(new FileInputStream(
+					"src/main/java/com/clearminds/ccgo/middleware/properties"));
+			propiedadClase =  propiedades.getProperty("clase");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return propiedadClase;
 	}
 
 	public void insertarPersona(Persona persona) {
