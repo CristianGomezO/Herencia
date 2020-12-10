@@ -3,8 +3,14 @@ package com.clearminds.ccgo.model;
 public class Persona {
 	private String nombre;
 	private String apellido;
-	private String edad;
+	private int edad;
 	
+	public Persona(String nombre, String apellido, int edad) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+	}
 	
 	public String getNombre() {
 		return nombre;
@@ -18,10 +24,10 @@ public class Persona {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public String getEdad() {
+	public int getEdad() {
 		return edad;
 	}
-	public void setEdad(String edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 	@Override
