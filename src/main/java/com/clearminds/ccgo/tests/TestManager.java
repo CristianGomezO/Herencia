@@ -15,12 +15,7 @@ public class TestManager {
 		personaManager.actualizarPersona(persona);
 		personaManager.eliminarPersona(persona);
 		
-		System.out.println();
 		
-		ServicioPersonaArchivo personaArchivo = new ServicioPersonaArchivo();
-		personaArchivo.insertar(persona);
-		personaArchivo.actualizar(persona);
-		personaArchivo.eliminar(persona);
 	}
 
 }
